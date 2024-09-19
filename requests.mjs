@@ -43,7 +43,7 @@ const server = createServer((req,res)=>{
             res.statusCode = 200;
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({
-              message: `PUT request received successfully for Id: ${itemId}`,
+              message: `PUT request received for Id: ${itemId}`,
               updatedItem: updatedItem
             }));
           } catch (error) {
@@ -55,6 +55,7 @@ const server = createServer((req,res)=>{
 
 
       // DELETE request
+      
 })
 
 server.listen(PORT,()=>{
