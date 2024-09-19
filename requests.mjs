@@ -55,7 +55,10 @@ const server = createServer((req,res)=>{
 
 
       // DELETE request
-      
+      else if (method==='DELETE' && parsedUrl.pathname.startsWith('/api/items/')) {
+        const itemId = parsedUrl.pathname.split('/').pop()
+        res.end(JSON.stringify({message:`Delete Request - Item Deleted with Id ${itemId}`}))
+    }
 })
 
 server.listen(PORT,()=>{
