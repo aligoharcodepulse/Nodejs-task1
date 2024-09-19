@@ -59,6 +59,11 @@ const server = createServer((req,res)=>{
         const itemId = parsedUrl.pathname.split('/').pop()
         res.end(JSON.stringify({message:`Delete Request - Item Deleted with Id ${itemId}`}))
     }
+
+    else{
+      res.statusCode = 404;
+      res.end(JSON.stringify("Not Found"))
+    }
 })
 
 server.listen(PORT,()=>{
