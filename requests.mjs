@@ -11,6 +11,7 @@ const server = createServer((req,res)=>{
         res.end(JSON.stringify({message:'GET Request - Fetching all Items'}));
     }
 
+
     // POST request
     else if (req.method === 'POST' && parsedUrl.pathname === '/api/items') {
         let body = '';
@@ -27,6 +28,33 @@ const server = createServer((req,res)=>{
              data:newItem}));
         });
       }
+
+
+      // PUT request
+      else if (req.method === 'PUT' && parsedUrl.pathname.startsWith('/api/items/')) {
+        let body = '';
+        const itemId = parsedUrl.pathname.split('/').pop(); 
+        req.on('data', (chunk) => {
+          body += chunk.toString();
+        });
+        req.on('end', () => {
+          try {
+            const updatedItem = JSON.parse(body);
+            res.statusCode = 200;
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({
+              message: `PUT request received successfully for Id: ${itemId}`,
+              updatedItem: updatedItem
+            }));
+          } catch (error) {
+            res.statusCode = 400; 
+            res.end(JSON.stringify({ error: 'Invalid JSON format' }));
+          }
+        });
+      }
+
+
+      // DELETE request
 })
 
 server.listen(PORT,()=>{
