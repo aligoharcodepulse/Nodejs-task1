@@ -13,6 +13,9 @@ const server = createServer((req,res)=>{
     else if (url === '/contact') {
         res.end('This is Contact Page.')
     }
+    else if (url === '/services') {
+        res.end('This is Services Page.')
+    }
     else{
         res.statusCode = 404
         res.end('Page Not Found')
